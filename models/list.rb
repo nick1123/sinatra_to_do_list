@@ -15,7 +15,9 @@ class List < Sequel::Model
 
     # print out the number of records
     puts "List count: #{table_handle.count}"
-    
+  end
 
+  def self.table_exists?
+    ::DB.table_exists?(::List::TABLE_NAME)
   end
 end
