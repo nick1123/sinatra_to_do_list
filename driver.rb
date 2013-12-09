@@ -18,3 +18,9 @@ get '/' do
   @lists = ::List.all
   slim :lists
 end
+
+post '/' do
+  ::List.create(:name => params['list']['name'])
+  @lists = ::List.all
+  slim :lists
+end

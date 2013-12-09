@@ -6,7 +6,7 @@ class List < Sequel::Model
   def self.create_table
     # Creates the table unless the table already exists.
     ::DB.create_table? ::List::TABLE_NAME do
-      primary_key :id
+      Integer :id, :primary_key => true
       String :name
     end
 
@@ -14,6 +14,8 @@ class List < Sequel::Model
     table_handle = ::DB[::List::TABLE_NAME]
     table_handle.insert(:name => 'Home')
     table_handle.insert(:name => 'Work')
+
+    ::List.dataset = ::List.dataset
   end
 
   def self.table_exists?
