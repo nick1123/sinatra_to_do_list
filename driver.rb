@@ -11,21 +11,20 @@ DB = Sequel.sqlite
 Dir[File.dirname(__FILE__) + '/models/*.rb'].each {|file| require file}
 
 # Create tables and insert dummy data
-::List.create_table unless ::List.table_exists?
-::Item.create_table unless ::Item.table_exists?
+::Task.create_table unless ::Task.table_exists?
 
 get '/' do
-  @lists = ::List.all
-  slim :lists
+  @tasks = ::Task.all
+  slim :tasks
 end
 
 post '/' do
-  ::List.create(:name => params['list']['name'])
-  @lists = ::List.all
-  slim :lists
+  ::Task.create(:name => params['task']['name'])
+  @tasks = ::Task.all
+  slim :tasks
 end
 
-delete '/list/:id' do
-  ::List.find(params[:id]).destroy
+delete '/task/:id' do
+  ::Task.where(:id => params[:id]).destroy
   redirect to('/')
 end
