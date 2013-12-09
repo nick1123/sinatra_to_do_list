@@ -5,10 +5,9 @@ form action="/" method="POST"
 h2 Tasks Not Done
 
 table
-  - @incomplete_tasks.each do |task|
+  - @incomplete_tasks.each_with_index do |task, index|
     tr
       td = task[:name]
-      td = task[:order_value]
       td
         form.delete action="/task/#{task.id}" method="POST"
           input type="hidden" name="_method" value="DELETE"
@@ -17,6 +16,12 @@ table
         form.update action="/task/#{task.id}" method="POST"
           input type="hidden" name="_method" value="PUT"
           input type="submit" value="Complete Task" title="Complete Task"
+      td
+        - if index > 0
+          form.update action="/swap_order_values/#{task.id}/#{@incomplete_tasks[index-1].id}" method="POST"
+            input type="hidden" name="_method" value="PUT"
+            input type="submit" value="Move Up" title="Move Up"
+      - previous_task = task
 
 h2 Completed Tasks
 
