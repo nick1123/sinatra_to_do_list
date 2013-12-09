@@ -4,27 +4,33 @@ form action="/" method="POST"
 
 h2 Tasks Not Done
 
-ul.tasks
+table
   - @incomplete_tasks.each do |task|
-    li
-      = task[:name]
-      form.delete action="/task/#{task.id}" method="POST"
-        input type="hidden" name="_method" value="DELETE"
-        input type="submit" value="Delete"  title="Delete"
-      form.update action="/task/#{task.id}" method="POST"
-        input type="hidden" name="_method" value="PUT"
-        input type="submit" value="Complete Task" title="Complete Task"
+    tr
+      td = task[:name]
+      td = task[:order_value]
+      td
+        form.delete action="/task/#{task.id}" method="POST"
+          input type="hidden" name="_method" value="DELETE"
+          input type="submit" value="Delete"  title="Delete"
+      td
+        form.update action="/task/#{task.id}" method="POST"
+          input type="hidden" name="_method" value="PUT"
+          input type="submit" value="Complete Task" title="Complete Task"
 
 h2 Completed Tasks
 
-ul.tasks
+table
   - @completed_tasks.each do |task|
-    li
-      = task[:name]
-      form.delete action="/task/#{task.id}" method="POST"
-        input type="hidden" name="_method" value="DELETE"
-        input type="submit" value="Delete"  title="Delete"
-      form.update action="/task/#{task.id}" method="POST"
-        input type="hidden" name="_method" value="PUT"
-        input type="submit" value="UnComplete Task" title="UnComplete Task"
+    tr
+      td = task[:name]
+      td = task[:order_value]
+      td
+        form.delete action="/task/#{task.id}" method="POST"
+          input type="hidden" name="_method" value="DELETE"
+          input type="submit" value="Delete"  title="Delete"
+      td
+        form.update action="/task/#{task.id}" method="POST"
+          input type="hidden" name="_method" value="PUT"
+          input type="submit" value="UnComplete Task" title="UnComplete Task"
 
