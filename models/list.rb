@@ -1,4 +1,6 @@
 class List < Sequel::Model
+  one_to_many :items
+
   TABLE_NAME = :lists
 
   def self.create_table
@@ -12,9 +14,6 @@ class List < Sequel::Model
     table_handle = ::DB[::List::TABLE_NAME]
     table_handle.insert(:name => 'Home')
     table_handle.insert(:name => 'Work')
-
-    # print out the number of records
-    puts "List count: #{table_handle.count}"
   end
 
   def self.table_exists?

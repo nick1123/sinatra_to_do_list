@@ -8,6 +8,5 @@ DB = Sequel.sqlite
 # Require models
 Dir[File.dirname(__FILE__) + '/models/*.rb'].each {|file| require file}
 
-5.times do
-  ::List.create_table unless ::List.table_exists?
-end
+::List.create_table unless ::List.table_exists?
+::Item.create_table unless ::Item.table_exists?
