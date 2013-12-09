@@ -24,3 +24,8 @@ post '/' do
   @lists = ::List.all
   slim :lists
 end
+
+delete '/list/:id' do
+  ::List.find(params[:id]).destroy
+  redirect to('/')
+end
