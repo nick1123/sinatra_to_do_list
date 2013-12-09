@@ -5,7 +5,8 @@ class Task < Sequel::Model
     # Creates the table unless the table already exists.
     ::DB.create_table? ::Task::TABLE_NAME do
       Integer :id, :primary_key => true
-      String :name
+      String  :name
+      Boolean :completed, :default => false
     end
 
     # Add some data

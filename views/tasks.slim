@@ -2,13 +2,29 @@ form action="/" method="POST"
   input type="text" name="task[name]"
   input.button type="submit" value="New Task >>"
 
-h2 My Tasks
+h2 Tasks Not Done
 
 ul.tasks
-  - @tasks.each do |task|
+  - @incomplete_tasks.each do |task|
     li
       = task[:name]
       form.delete action="/task/#{task.id}" method="POST"
         input type="hidden" name="_method" value="DELETE"
         input type="submit" value="Delete"  title="Delete"
+      form.update action="/task/#{task.id}" method="POST"
+        input type="hidden" name="_method" value="PUT"
+        input type="submit" value="Complete Task" title="Complete Task"
+
+h2 Completed Tasks
+
+ul.tasks
+  - @completed_tasks.each do |task|
+    li
+      = task[:name]
+      form.delete action="/task/#{task.id}" method="POST"
+        input type="hidden" name="_method" value="DELETE"
+        input type="submit" value="Delete"  title="Delete"
+      form.update action="/task/#{task.id}" method="POST"
+        input type="hidden" name="_method" value="PUT"
+        input type="submit" value="UnComplete Task" title="UnComplete Task"
 
